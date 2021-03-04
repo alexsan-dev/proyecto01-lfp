@@ -1,0 +1,14 @@
+     restaurante   = 'restaurante'
+'Bebidas'  :
+[bebida_1;'Bebida #1';11.;'Descripción Bebida 1'    ]
+[ bebida_2;'Bebida #2';10.50;    'Descripción Bebida 2']
+
+'Desayunos':
+[d1;'Desayuno 1';45.00;'Descripción Desayuno 1']
+[d2 ;'Desayuno 2';    40.   ;'Descripción Desayuno 2']
+[d3;'Desayuno 3';35;'Descripción Desayuno 3']
+
+'  Postres':
+[   pos_001;'Postre 1'   ;25;'Descripción Postre 1']
+
+   restaurantes=      'my'
