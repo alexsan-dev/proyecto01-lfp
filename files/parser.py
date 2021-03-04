@@ -41,7 +41,7 @@ def find_restaurants(res_names, line, line_number, errs):
 
         # AGREGAR RESTAURANTE
         else:
-            res_names.append(groups[2].replace('\'', ''))
+            res_names.append(groups[2].replace('\'', '').strip())
 
 
 def find_sections(res_sections, line, line_number, errs):
@@ -65,7 +65,7 @@ def find_sections(res_sections, line, line_number, errs):
 
         # AGREGAR RESTAURANTE
         else:
-            res_sections.append(groups[0].replace('\'', ''))
+            res_sections.append(groups[0].replace('\'', '').strip())
 
     return res_sections
 
