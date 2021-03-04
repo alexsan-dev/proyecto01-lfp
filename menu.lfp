@@ -1,5 +1,5 @@
-     restaurante   = 'restaurante'
-'Bebidas'  :
+     restaurante   = 'Restaurante LFP'
+   'Bebidas':
 [bebida_1;'Bebida #1';11.;'Descripción Bebida 1'    ]
 [ bebida_2;'Bebida #2';10.50;    'Descripción Bebida 2']
 
@@ -10,5 +10,3 @@
 
 '  Postres':
 [   pos_001;'Postre 1'   ;25;'Descripción Postre 1']
-
-   restaurantes=      'my'
