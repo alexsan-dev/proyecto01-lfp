@@ -1,0 +1,48 @@
+[
+  {
+    "res_name": "Restaurante LFP",
+    "sections": [
+      {
+        "name": "Bebidas",
+        "options": [
+          {
+            "id": "bebida_1",
+            "name": "Bebida #1",
+            "price": 11.0,
+            "description": "Descripción Bebida 1"
+          },
+          {
+            "id": "bebida_2",
+            "name": "Bebida #2",
+            "price": 10.5,
+            "description": "Descripción Bebida 2"
+          }
+        ]
+      },
+      {
+        "name": "Desayunos",
+        "options": [
+          {
+            "id": "d1",
+            "name": "Desayuno 1",
+            "price": 45.0,
+            "description": "Descripción Desayuno 1"
+          },
+          {
+            "id": "d2",
+            "name": "Desayuno 2",
+            "price": 40.0,
+            "description": "Descripción Desayuno 2"
+          },
+          {
+            "id": "d3",
+            "name": "Desayuno 3",
+            "price": 35.0,
+            "description": "Descripción Desayuno 3"
+          }
+        ]
+      },
+      { "name": "Postres", "options": [] }
+    ]
+  }
+]
