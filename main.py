@@ -13,7 +13,7 @@ class main():
 
     # MENU PRINCIPAL
     def init_menu(self):
-        menu('(1) Cargar | (2) Generar | (3) Salir', {
+        menu('(1) Cargar menu | (2) Generar orden | (3) Salir', {
             1: self.set_file,
             2: self.get_output_file,
             3: self.exit

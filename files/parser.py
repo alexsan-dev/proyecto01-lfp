@@ -18,12 +18,22 @@ def add_error(errs, err_index, groups, line, line_number, msg, custom_col=0):
         "char": char,
         "msg": msg,
         "col": col,
-        "row": line_number,
-        "toString": lambda: f"Error {errNo}: {msg} en linea: {line_number}, columna: {col}"
+        "row": line_number
     })
 
 
-def find_restaurants(res_names, line, line_number, errs):
+# AGREGAR TOKEN
+def add_token(res_tokens, groups, group_index, line, line_number, token_name):
+    # TOKEN DE ID
+    res_tokens.append({
+        "lex": groups[group_index],
+        "row": line_number,
+        "col": re.search(groups[group_index], line).start() + 1,
+        "token": token_name
+    })
+
+
+def find_restaurants(res_tokens, res_names, line, line_number, errs):
     # SEARCH
     res_declarations = re.search(
         "^\s*(\w+)\s*(\W)\s*(\'*([^\']*)?\'*)", line)
@@ -49,12 +59,23 @@ def find_restaurants(res_names, line, line_number, errs):
 
         # AGREGAR RESTAURANTE
         else:
+            # TOKEN DE ID
+            add_token(res_tokens, groups, 0, line,
+                      line_number, "identificador")
+
+            # TOKEN DE OPERADOR
+            add_token(res_tokens, groups, 1, line, line_number, "operador")
+
+            # TOKEN DE CADENA
+            add_token(res_tokens, groups, 2, line, line_number, "cadena")
+
+            # AGREGAR
             res_names.append(groups[2].replace('\'', '').strip())
 
 # BUSCAR SECCIONES
 
 
-def find_sections(res_sections, line, line_number, errs):
+def find_sections(res_tokens, res_sections, line, line_number, errs):
     # SEARCH
     res_declarations = re.search(
         "^\s*('([^']*)'*)\s*(\W)", line)
@@ -75,13 +96,20 @@ def find_sections(res_sections, line, line_number, errs):
 
         # AGREGAR RESTAURANTE
         else:
+            # TOKEN DE CADENA
+            add_token(res_tokens, groups, 0, line, line_number, "cadena")
+
+            # TOKEN DE OPERADOR
+            add_token(res_tokens, groups, 2, line, line_number, "operador")
+
+            # AGREGAR
             res_sections.append(groups[0].replace('\'', '').strip())
             return True
 
 # BUSCAR OPCIONES
 
 
-def find_options(res_options, line, line_number, errs, sections_index):
+def find_options(res_tokens, res_options, line, line_number, errs, sections_index):
     # SEARCH
     res_declarations = re.search(
         "^\s*(\[.*\W.*\W.*\W.*\]*)", line)
@@ -125,6 +153,23 @@ def find_options(res_options, line, line_number, errs, sections_index):
 
             # OPCIÓN VALIDA
             else:
+                # TOKEN DE ID
+                add_token(res_tokens, option_values, 0,
+                          line, line_number, "identificador")
+
+                # TOKEN DE CADENA
+                add_token(res_tokens, option_values, 1,
+                          line, line_number, "cadena")
+
+                # TOKEN DE NUMERO
+                add_token(res_tokens, option_values, 2,
+                          line, line_number, "número")
+
+                # TOKEN DE CADENA
+                add_token(res_tokens, option_values, 3,
+                          line, line_number, "cadena")
+
+                # AGREGAR
                 current_option = res_options.get(sections_index, [])
                 current_option.append({
                     "id": option_values[0],
@@ -142,6 +187,7 @@ def parse_menu_files(lines):
     errs = []
     res_names = []
     res_sections = []
+    res_tokens = []
     res_options = {}
     sections_index = -1
 
@@ -152,16 +198,17 @@ def parse_menu_files(lines):
     line_number = 1
     for line in lines.split('\n'):
         # BUSCAR NOMBRES DE RESTAURANTES
-        find_restaurants(res_names, line, line_number, errs)
+        find_restaurants(res_tokens, res_names, line, line_number, errs)
 
         # BUSCAR NOMBRES DE SECCIONES
-        valid_section = find_sections(
-            res_sections, line, line_number, errs)
+        valid_section = find_sections(res_tokens,
+                                      res_sections, line, line_number, errs)
         if valid_section:
             sections_index += 1
 
         # BUSCAR SECCIONES
-        find_options(res_options, line, line_number, errs, sections_index)
+        find_options(res_tokens, res_options, line,
+                     line_number, errs, sections_index)
 
         # AUMENTAR LINEA
         line_number += 1
@@ -180,10 +227,12 @@ def parse_menu_files(lines):
         # DATOS FINALES
         data_dict = {
             "res_name": res_name,
-            "sections": sections
+            "sections": sections,
+            "errs": errs,
+            "tokens": res_tokens
         }
 
         # AGREGAR
         data.append(data_dict)
 
-    return errs if len(errs) > 0 else data
+    return data
