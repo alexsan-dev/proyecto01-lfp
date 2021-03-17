@@ -214,25 +214,22 @@ def parse_menu_files(lines):
         line_number += 1
 
     # CREAR SECCIONES
-    for res_name in res_names:
-        # RECORRER SECCIONES
-        sections = []
-        for res_section_index in range(len(res_sections)):
+    sections = []
+    for res_section_index in range(len(res_sections)):
 
-            sections.append({
-                "name": res_sections[res_section_index],
-                "options": res_options.get(res_section_index, [])
-            })
+        sections.append({
+            "name": res_sections[res_section_index],
+            "options": res_options.get(res_section_index, [])
+        })
 
-        # DATOS FINALES
-        data_dict = {
-            "res_name": res_name,
-            "sections": sections,
-            "errs": errs,
-            "tokens": res_tokens
-        }
+    # DATOS FINALES
+    data_dict = {
+        "res_name": res_names[0] if len(res_names) > 0 else '',
+        "sections": sections,
+        "errs": errs,
+        "tokens": res_tokens
+    }
 
-        # AGREGAR
-        data.append(data_dict)
-
+    # AGREGAR
+    data.append(data_dict)
     return data

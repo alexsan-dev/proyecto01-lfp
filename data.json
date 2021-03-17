@@ -1,6 +1,6 @@
 [
   {
-    "res_name": "Restaurante LFP",
+    "res_name": "",
     "sections": [
       {
         "name": "Bebidas",
@@ -54,11 +54,8 @@
         ]
       }
     ],
-    "errs": [],
+    "errs": [{ "char": ":", "msg": "':' debe ser '='", "col": 20, "row": 1 }],
     "tokens": [
-      { "lex": "restaurante", "row": 1, "col": 6, "token": "identificador" },
-      { "lex": "=", "row": 1, "col": 20, "token": "operador" },
-      { "lex": "'Restaurante LFP'", "row": 1, "col": 22, "token": "cadena" },
       { "lex": "'Bebidas'", "row": 2, "col": 4, "token": "cadena" },
       { "lex": ":", "row": 2, "col": 14, "token": "operador" },
       { "lex": "bebida_1", "row": 3, "col": 2, "token": "identificador" },
