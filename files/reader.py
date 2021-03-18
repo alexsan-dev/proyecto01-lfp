@@ -16,9 +16,9 @@ class lfp_reader():
     # root.destroy()
 
     # OBTENER
-    def get_lines(self):
+    def get_lines(self, dev_path='./menu.lfp'):
         # LEER LINEAS
-        lfp_stream = open('./menu.lfp', encoding='utf-8')
+        lfp_stream = open(dev_path, encoding='utf-8')
         lfp_lines = lfp_stream.read()
 
         # CERRAR STREAM

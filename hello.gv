@@ -1,17 +1,17 @@
 digraph G {
 	"Restaurante LFP" -> Bebidas [constraint=True]
-	Bebidas -> "Bebida #2 Q 10.5
+	Bebidas -> "Bebida #2 Q10.5
 Descripción Bebida 2" [constraint=True]
-	Bebidas -> "Bebida #1 Q 11.0
+	Bebidas -> "Bebida #1 Q11.0
 Descripción Bebida 1" [constraint=True]
 	"Restaurante LFP" -> Desayunos [constraint=True]
-	Desayunos -> "Desayuno 3 Q 35.0
+	Desayunos -> "Desayuno 3 Q35.0
 Descripción Desayuno 3" [constraint=True]
-	Desayunos -> "Desayuno 2 Q 40.0
+	Desayunos -> "Desayuno 2 Q40.0
 Descripción Desayuno 2" [constraint=True]
-	Desayunos -> "Desayuno 1 Q 45.0
+	Desayunos -> "Desayuno 1 Q45.0
 Descripción Desayuno 1" [constraint=True]
 	"Restaurante LFP" -> Postres [constraint=True]
-	Postres -> "Postre 1 Q 0.25
+	Postres -> "Postre 1 Q0.25
 Descripción Postre 1" [constraint=True]
 }

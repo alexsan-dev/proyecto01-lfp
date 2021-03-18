@@ -32,6 +32,8 @@ def add_token(res_tokens, groups, group_index, line, line_number, token_name):
         "token": token_name
     })
 
+# BUSCAR RESTAURANTES
+
 
 def find_restaurants(res_tokens, res_names, line, line_number, errs):
     # SEARCH
@@ -109,7 +111,7 @@ def find_sections(res_tokens, res_sections, line, line_number, errs):
 # BUSCAR OPCIONES
 
 
-def find_options(res_tokens, res_options, line, line_number, errs, sections_index):
+def find_options(res_tokens, res_options, line, line_number, errs, sections_index, price_limit):
     # SEARCH
     res_declarations = re.search(
         "^\s*(\[.*\W.*\W.*\W.*\]*)", line)
@@ -141,7 +143,7 @@ def find_options(res_tokens, res_options, line, line_number, errs, sections_inde
                           "falto cerrar comillas" if quotes else "se esperaba un string", re.search(option_values[1], line).start() + 1 + len(option_values[1]) if quotes else 0)
 
             # VERIFICAR PRECIO
-            elif not re.match("\.*[0-9]+(\.[0-9]*)?", option_values[2]):
+            elif not re.match("\.?[0-9]+(\.[0-9]*)?", option_values[2]):
                 add_error(errs, 2, option_values, line, line_number,
                           "se esperaba un numero")
 
@@ -171,18 +173,116 @@ def find_options(res_tokens, res_options, line, line_number, errs, sections_inde
 
                 # AGREGAR
                 current_option = res_options.get(sections_index, [])
-                current_option.append({
-                    "id": option_values[0],
-                    "name": option_values[1].replace('\'', ''),
-                    "price": float(option_values[2]),
-                    "description": option_values[3].replace('\'', '')
-                })
+                if float(option_values[2]) <= price_limit:
+                    current_option.append({
+                        "id": option_values[0],
+                        "name": option_values[1].replace('\'', ''),
+                        "price": float(option_values[2]),
+                        "description": option_values[3].replace('\'', '')
+                    })
 
                 # REASIGNAR
                 res_options[sections_index] = current_option
 
+# BUSCAR CLIENTE
 
-def parse_menu_files(lines):
+
+def find_customers(res_tokens, res_customers, line, line_number, errs):
+    # SEARCH
+    res_declarations = re.search(
+        "^\s*(\W)([^']*)(\W)\s*(\W)\s*(\W)([^']*)(\W)\s*(\W)\s*(\W)([^']*)(\W)\s*(\W)\s*([^']*)(\W)\s*", line)
+
+    # BUSCAR OPCIONES
+    if res_declarations:
+        # GRUPOS
+        groups = res_declarations.groups()
+
+        # ERRORES DE COMILLAS
+        if groups[0] != "'":
+            add_error(errs, 0, groups, line, line_number,
+                      "debe ser comillas simple")
+
+        elif groups[2] != "'":
+            add_error(errs, 2, groups, line, line_number,
+                      "debe ser comillas simple", re.search(groups[1], line).end() - 1)
+
+        elif groups[4] != "'":
+            add_error(errs, 4, groups, line, line_number,
+                      "debe ser comillas simple", re.search(groups[5], line).start() + 1)
+
+        elif groups[6] != "'":
+            add_error(errs, 6, groups, line, line_number,
+                      "debe ser comillas simple", re.search(groups[5], line).end())
+
+        elif groups[8] != "'":
+            add_error(errs, 8, groups, line, line_number,
+                      "debe ser comillas simple",  re.search(groups[9], line).start() + 1)
+
+        elif groups[10] != "'":
+            add_error(errs, 10, groups, line, line_number,
+                      "debe ser comillas simple", re.search(groups[9], line).end() - 1)
+
+        # ERRORES DE NÚMEROS
+        elif not re.match("\.?[0-9]+(\.[0-9]*)?", groups[12], re.IGNORECASE):
+            add_error(errs, 12, groups, line, line_number,
+                      "se esperaba un numero")
+
+        # ERRORES DE PORCENTAJE
+        elif groups[13] != '%':
+            add_error(errs, 13, groups, line, line_number,
+                      "debe ser '%'")
+
+        # AGREGAR TOKENS
+        else:
+            # TOKENS DE CADENAS
+            add_token(res_tokens, groups, 1,
+                      line, line_number, "cadena")
+            add_token(res_tokens, groups, 5,
+                      line, line_number, "cadena")
+            add_token(res_tokens, groups, 9,
+                      line, line_number, "cadena")
+
+            # TOKENS DE NÚMEROS
+            add_token(res_tokens, groups, 12,
+                      line, line_number, "numero")
+
+            # AGREGAR
+            res_customers.append({
+                "name": groups[1],
+                "nit": groups[5],
+                "address":  groups[9],
+                "tip": groups[12]
+            })
+            return True
+
+# DICCIONARIO DE ORDENES
+
+
+def parse_order_files(lines):
+    # LISTA DE ERRORES Y RESTAURANTES
+    errs = []
+    res_customers = []
+    res_tokens = []
+
+    # LISTA DE DATOS FINALES
+    data = []
+
+    # RECCORER
+    line_number = 1
+    for line in lines.split('\n'):
+        # BUSCAR NOMBRES DE RESTAURANTES
+        find_customers(
+            res_tokens, res_customers, line, line_number, errs)
+
+        # AUMENTAR LINEA
+        line_number += 1
+
+    # AGREGAR
+    return data
+
+
+# DICCIONARIO DE MENUS
+def parse_menu_files(lines, price_limit):
     # LISTA DE ERRORES Y RESTAURANTES
     errs = []
     res_names = []
@@ -208,7 +308,7 @@ def parse_menu_files(lines):
 
         # BUSCAR SECCIONES
         find_options(res_tokens, res_options, line,
-                     line_number, errs, sections_index)
+                     line_number, errs, sections_index, price_limit)
 
         # AUMENTAR LINEA
         line_number += 1
@@ -216,7 +316,6 @@ def parse_menu_files(lines):
     # CREAR SECCIONES
     sections = []
     for res_section_index in range(len(res_sections)):
-
         sections.append({
             "name": res_sections[res_section_index],
             "options": res_options.get(res_section_index, [])
