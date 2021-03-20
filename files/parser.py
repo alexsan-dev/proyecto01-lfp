@@ -184,6 +184,59 @@ def find_options(res_tokens, res_options, line, line_number, errs, sections_inde
                 # REASIGNAR
                 res_options[sections_index] = current_option
 
+# BUSCAR PEDIDOS
+
+
+def find_orders(res_tokens, res_orders, line, line_number, errs, menu_data):
+    # SEARCH
+    res_declarations = re.search("^\s*(\w+)\s*(\W)\s*(\w+)", line)
+
+    if res_declarations:
+        # GRUPOS
+        groups = res_declarations.groups()
+
+        # ERROR DE NÚMEROS
+        if not re.match("\.?[0-9]+(\.[0-9]*)?", groups[0], re.IGNORECASE):
+            add_error(errs, 0, groups, line, line_number,
+                      "se esperaba un número")
+
+        # ERROR DE COMA
+        elif groups[1] != ',':
+            add_error(errs, 1, groups, line, line_number,
+                      "debe ser ','")
+
+        # ERROR DE ID
+        elif not re.match("[a-z][a-z0-9_]*", groups[2]):
+            add_error(errs, 2, groups, line, line_number,
+                      "id con formato incorrecto")
+
+        # AGREGAR
+        else:
+            # TOKEN DE ID
+            add_token(res_tokens, groups, 0,
+                      line, line_number, "numero")
+
+            # TOKEN DE NUMERO
+            add_token(res_tokens, groups, 2,
+                      line, line_number, "identificador")
+
+            # VALIDAR ID
+            invalid_id = groups[2]
+            for section in menu_data[0]["sections"]:
+                for option in section["options"]:
+                    if option["id"] == groups[2]:
+                        invalid_id = None
+
+            if invalid_id == None:
+                # AGREGAR A ORDENES
+                res_orders.append({
+                    "quantity": int(groups[0]),
+                    "id": groups[2]
+                })
+
+            return invalid_id
+
+
 # BUSCAR CLIENTE
 
 
@@ -232,6 +285,19 @@ def find_customers(res_tokens, res_customers, line, line_number, errs):
             add_error(errs, 13, groups, line, line_number,
                       "debe ser '%'")
 
+        # ERRORES DE COMAS
+        elif groups[3] != ",":
+            add_error(errs, 3, groups, line, line_number,
+                      "debe ser ','", re.search(groups[1], line).end() + 2)
+
+        elif groups[7] != ",":
+            add_error(errs, 7, groups, line, line_number,
+                      "debe ser ','", re.search(groups[5], line).end() + 2)
+
+        elif groups[11] != ",":
+            add_error(errs, 11, groups, line, line_number,
+                      "debe ser ','", re.search(groups[9], line).end() + 2)
+
         # AGREGAR TOKENS
         else:
             # TOKENS DE CADENAS
@@ -251,31 +317,60 @@ def find_customers(res_tokens, res_customers, line, line_number, errs):
                 "name": groups[1],
                 "nit": groups[5],
                 "address":  groups[9],
-                "tip": groups[12]
+                "tip": float(groups[12])
             })
             return True
 
 # DICCIONARIO DE ORDENES
 
 
-def parse_order_files(lines):
+def parse_order_files(lines, menu_data):
     # LISTA DE ERRORES Y RESTAURANTES
     errs = []
     res_customers = []
+    res_orders = []
     res_tokens = []
 
-    # LISTA DE DATOS FINALES
-    data = []
+    enable_generate = True
+    invalid_order = None
+    data = None
 
     # RECCORER
     line_number = 1
     for line in lines.split('\n'):
-        # BUSCAR NOMBRES DE RESTAURANTES
+        # BUSCAR CLIENTES
         find_customers(
             res_tokens, res_customers, line, line_number, errs)
 
+        # BUSCAR ORDENES
+        invalid_order = find_orders(
+            res_tokens, res_orders, line, line_number, errs, menu_data)
+
+        if invalid_order:
+            input(f'Ocurrió un error {invalid_order} no existe en el menu ')
+            enable_generate = False
+            break
+
         # AUMENTAR LINEA
         line_number += 1
+
+    # AGREGAR A DICCIONARIO
+    if len(res_customers) > 0 and enable_generate:
+        data = {
+            "customer": res_customers[0],
+            "orders": res_orders,
+            "tokens": res_tokens,
+            "errs": errs
+        }
+    else:
+        data = {
+            "errs": [{
+                "char": invalid_order,
+                "msg": 'Identificador no existe en menu',
+                "col": 0,
+                "row": 0
+            }]
+        }
 
     # AGREGAR
     return data

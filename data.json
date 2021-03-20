@@ -1,121 +1,32 @@
-[
-  {
-    "res_name": "",
-    "sections": [
-      {
-        "name": "Bebidas",
-        "options": [
-          {
-            "id": "bebida_1",
-            "name": "Bebida #1",
-            "price": 11.0,
-            "description": "Descripción Bebida 1"
-          },
-          {
-            "id": "bebida_2",
-            "name": "Bebida #2",
-            "price": 10.5,
-            "description": "Descripción Bebida 2"
-          }
-        ]
-      },
-      {
-        "name": "Desayunos",
-        "options": [
-          {
-            "id": "d1",
-            "name": "Desayuno 1",
-            "price": 45.0,
-            "description": "Descripción Desayuno 1"
-          },
-          {
-            "id": "d2",
-            "name": "Desayuno 2",
-            "price": 40.0,
-            "description": "Descripción Desayuno 2"
-          },
-          {
-            "id": "d3",
-            "name": "Desayuno 3",
-            "price": 35.0,
-            "description": "Descripción Desayuno 3"
-          }
-        ]
-      },
-      {
-        "name": "Postres",
-        "options": [
-          {
-            "id": "pos_001",
-            "name": "Postre 1",
-            "price": 0.25,
-            "description": "Descripción Postre 1"
-          }
-        ]
-      }
-    ],
-    "errs": [{ "char": ":", "msg": "':' debe ser '='", "col": 20, "row": 1 }],
-    "tokens": [
-      { "lex": "'Bebidas'", "row": 2, "col": 4, "token": "cadena" },
-      { "lex": ":", "row": 2, "col": 14, "token": "operador" },
-      { "lex": "bebida_1", "row": 3, "col": 2, "token": "identificador" },
-      { "lex": "'Bebida #1'", "row": 3, "col": 11, "token": "cadena" },
-      { "lex": "11.", "row": 3, "col": 23, "token": "número" },
-      {
-        "lex": "'Descripción Bebida 1'",
-        "row": 3,
-        "col": 27,
-        "token": "cadena"
-      },
-      { "lex": "bebida_2", "row": 4, "col": 6, "token": "identificador" },
-      { "lex": "'Bebida #2'", "row": 4, "col": 15, "token": "cadena" },
-      { "lex": "10.50", "row": 4, "col": 27, "token": "número" },
-      {
-        "lex": "'Descripción Bebida 2'",
-        "row": 4,
-        "col": 37,
-        "token": "cadena"
-      },
-      { "lex": "'Desayunos'", "row": 6, "col": 1, "token": "cadena" },
-      { "lex": ":", "row": 6, "col": 12, "token": "operador" },
-      { "lex": "d1", "row": 7, "col": 2, "token": "identificador" },
-      { "lex": "'Desayuno 1'", "row": 7, "col": 5, "token": "cadena" },
-      { "lex": "45.00", "row": 7, "col": 18, "token": "número" },
-      {
-        "lex": "'Descripción Desayuno 1'",
-        "row": 7,
-        "col": 24,
-        "token": "cadena"
-      },
-      { "lex": "d2", "row": 8, "col": 2, "token": "identificador" },
-      { "lex": "'Desayuno 2'", "row": 8, "col": 6, "token": "cadena" },
-      { "lex": "40.", "row": 8, "col": 23, "token": "número" },
-      {
-        "lex": "'Descripción Desayuno 2'",
-        "row": 8,
-        "col": 30,
-        "token": "cadena"
-      },
-      { "lex": "d3", "row": 9, "col": 2, "token": "identificador" },
-      { "lex": "'Desayuno 3'", "row": 9, "col": 5, "token": "cadena" },
-      { "lex": "35", "row": 9, "col": 18, "token": "número" },
-      {
-        "lex": "'Descripción Desayuno 3'",
-        "row": 9,
-        "col": 21,
-        "token": "cadena"
-      },
-      { "lex": "'  Postres'", "row": 11, "col": 1, "token": "cadena" },
-      { "lex": ":", "row": 11, "col": 12, "token": "operador" },
-      { "lex": "pos_001", "row": 12, "col": 5, "token": "identificador" },
-      { "lex": "'Postre 1'", "row": 12, "col": 18, "token": "cadena" },
-      { "lex": ".25", "row": 12, "col": 33, "token": "número" },
-      {
-        "lex": "'Descripción Postre 1'",
-        "row": 12,
-        "col": 37,
-        "token": "cadena"
-      }
-    ]
-  }
-]
+{
+  "customer": {
+    "name": "Luis Morales",
+    "nit": "12345676",
+    "address": "Guatemala",
+    "tip": 8.5
+  },
+  "orders": [
+    { "quantity": 2, "id": "bebida_1" },
+    { "quantity": 2, "id": "bebida_2" },
+    { "quantity": 2, "id": "d1" },
+    { "quantity": 2, "id": "d3" },
+    { "quantity": 4, "id": "pos_001" }
+  ],
+  "tokens": [
+    { "lex": "Luis Morales", "row": 1, "col": 6, "token": "cadena" },
+    { "lex": "12345676", "row": 1, "col": 24, "token": "cadena" },
+    { "lex": "Guatemala", "row": 1, "col": 36, "token": "cadena" },
+    { "lex": "8.5", "row": 1, "col": 50, "token": "numero" },
+    { "lex": "2", "row": 2, "col": 3, "token": "numero" },
+    { "lex": "bebida_1", "row": 2, "col": 12, "token": "identificador" },
+    { "lex": "2", "row": 3, "col": 1, "token": "numero" },
+    { "lex": "bebida_2", "row": 3, "col": 4, "token": "identificador" },
+    { "lex": "2", "row": 4, "col": 1, "token": "numero" },
+    { "lex": "d1", "row": 4, "col": 4, "token": "identificador" },
+    { "lex": "2", "row": 5, "col": 2, "token": "numero" },
+    { "lex": "d3", "row": 5, "col": 4, "token": "identificador" },
+    { "lex": "4", "row": 6, "col": 1, "token": "numero" },
+    { "lex": "pos_001", "row": 6, "col": 5, "token": "identificador" }
+  ],
+  "errs": []
+}
