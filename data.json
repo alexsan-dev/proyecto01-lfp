@@ -1,0 +1,32 @@
+{
+  "customer": {
+    "name": "Luis Morales",
+    "nit": "12345676",
+    "address": "Guatemala",
+    "tip": 8.5
+  },
+  "orders": [
+    { "quantity": 2, "id": "bebida_1" },
+    { "quantity": 2, "id": "bebida_2" },
+    { "quantity": 2, "id": "d1" },
+    { "quantity": 2, "id": "d3" },
+    { "quantity": 4, "id": "pos_001" }
+  ],
+  "tokens": [
+    { "lex": "Luis Morales", "row": 1, "col": 6, "token": "cadena" },
+    { "lex": "12345676", "row": 1, "col": 24, "token": "cadena" },
+    { "lex": "Guatemala", "row": 1, "col": 36, "token": "cadena" },
+    { "lex": "8.5", "row": 1, "col": 50, "token": "numero" },
+    { "lex": "2", "row": 2, "col": 3, "token": "numero" },
+    { "lex": "bebida_1", "row": 2, "col": 12, "token": "identificador" },
+    { "lex": "2", "row": 3, "col": 1, "token": "numero" },
+    { "lex": "bebida_2", "row": 3, "col": 4, "token": "identificador" },
+    { "lex": "2", "row": 4, "col": 1, "token": "numero" },
+    { "lex": "d1", "row": 4, "col": 4, "token": "identificador" },
+    { "lex": "2", "row": 5, "col": 2, "token": "numero" },
+    { "lex": "d3", "row": 5, "col": 4, "token": "identificador" },
+    { "lex": "4", "row": 6, "col": 1, "token": "numero" },
+    { "lex": "pos_001", "row": 6, "col": 5, "token": "identificador" }
+  ],
+  "errs": []
+}

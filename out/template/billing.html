@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Factura</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Work+Sans:wght@300;500&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				font-family: 'Work Sans', sans-serif;
+				margin: 0;
+				padding: 0;
+				user-select: none;
+				box-sizing: border-box;
+			}
+
+			@keyframes entry {
+				from {
+					opacity: 0.8;
+					transform: rotate(20deg) scale(1.2);
+				}
+
+				to {
+					opacity: 1;
+					transform: rotate(0deg) scale(1);
+				}
+			}
+
+			body {
+				background: hsl(0, 0%, 85%);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				width: 100%;
+				animation: entry 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			}
+
+			main {
+				position: relative;
+				width: 450px;
+				background: #ffff;
+				height: max-content;
+				max-height: 90vh;
+				padding: 40px;
+			}
+
+			main:after {
+				content: ' ';
+				display: block;
+				position: absolute;
+				top: -35px;
+				left: 0px;
+				width: 100%;
+				height: 36px;
+				background: linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -webkit-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-webkit-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -webkit-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -o-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-o-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -o-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -moz-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-moz-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -moz-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background-repeat: repeat-x;
+				background-size: 0px 100%, 20px 27px, 20px 27px;
+			}
+
+			main::before {
+				content: ' ';
+				display: block;
+				position: absolute;
+				bottom: -35px;
+				left: 0px;
+				width: 100%;
+				height: 36px;
+				transform: rotate(180deg);
+				background: linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -webkit-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-webkit-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -webkit-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -o-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-o-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -o-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background: -moz-linear-gradient(hsl(0, 0%, 85%) 0%, transparent 0%),
+					-moz-linear-gradient(135deg, #fff 33.33%, transparent 33.33%) 0 0%,
+					#fff -moz-linear-gradient(45deg, #fff 33.33%, hsl(0, 0%, 85%) 33.33%) 0 0%;
+				background-repeat: repeat-x;
+				background-size: 0px 100%, 20px 27px, 20px 27px;
+			}
+
+			header {
+				font-size: 0.8em;
+				margin-bottom: 10px;
+				opacity: 0.7;
+			}
+
+			#customer-info {
+				margin-bottom: 10px;
+			}
+
+			#customer-info p span {
+				opacity: 0.7;
+			}
+
+			#summary table {
+				width: 100%;
+			}
+
+			#summary #subtotal {
+				margin: 10px 0;
+			}
+
+			#summary #subtotal tr:nth-child(1) td:nth-child(2),
+			#summary #subtotal tr:nth-child(2) td:nth-child(2) {
+				text-align: right;
+			}
+
+			#summary table:nth-child(2) {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				text-align: left;
+			}
+
+			#summary table td {
+				opacity: 0.7;
+			}
+
+			#summary #summary-total tr:nth-child(even) {
+				background-color: #eee;
+			}
+
+			#summary #subtotal tr:nth-child(1) td:nth-child(1),
+			#summary #subtotal tr:nth-child(2) td:nth-child(1) {
+				opacity: 1;
+			}
+
+			#max-total {
+				font-size: 1.5em;
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<header>
+				<h1>{{ res_name }}</h1>
+				<p>Factura NO. 01</p>
+				<p>Fecha 18/03/2021</p>
+			</header>
+			<div id="customer-info">
+				<h2>Datos del Cliente:</h2>
+				<p><strong>Nombre: </strong><span>{{ c_name }}</span></p>
+				<p><strong>Nit: </strong><span>{{ c_nit }}</span></p>
+				<p><strong>Dirección: </strong><span>{{ c_address }}</span></p>
+			</div>
+			<div id="summary">
+				<h2>Descripción:</h2>
+				<table id="summary-total">
+					<tr>
+						<th>Cantidad</th>
+						<th>Concepto</th>
+						<th>Precio</th>
+						<th>Total</th>
+					</tr>
+					{{ summary }}
+				</table>
+
+				<hr />
+				<table id="subtotal">
+					<tr>
+						<td><strong>Subtotal</strong></td>
+						<td>Q{{ sub_total }}</td>
+					</tr>
+					<tr>
+						<td><strong>Propina {{ p_percent }}%</strong></td>
+						<td>Q{{ tip }}</td>
+					</tr>
+				</table>
+
+				<hr />
+				<p id="max-total"><strong>Total: </strong><span>Q{{ total }}</span></p>
+			</div>
+		</main>
+	</body>
+</html>

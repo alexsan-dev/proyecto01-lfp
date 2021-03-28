@@ -1,0 +1,35 @@
+digraph G {
+	"TACO BELL A DOMICILIO - Live Mas" -> PROMOCIONES [constraint=True]
+	PROMOCIONES -> "FAMILY BOX GRANDE (PARA 4) Q49.0
+2 Chalupas Supreme de Pollo Frito, 2 Burritos 5 capas, 4 Tacos Suaves, 1 Nachos Supreme y 2 Cinnamon Twists." [constraint=True]
+	PROMOCIONES -> "FAMILY BOX MEDIANO (PARA 2) Q99.0
+2 Crunchywrap Supreme, 2 Tacos Suaves de Carne + 1 Nacho Supreme." [constraint=True]
+	"TACO BELL A DOMICILIO - Live Mas" -> Combos [constraint=True]
+	Combos -> "STACKER DE CARNE Q14.0
+Carne sazonada, salsa queso, mezcla de 3 quesos derretidos a la perfección dentro una tortilla de harina a la plancha en forma de triángulo." [constraint=True]
+	Combos -> "BURRITO 5 CAPAS Q16.0
+Deliciosa carne sazonada, frijoles, salsa queso, crema agria, auténtico queso cheddar envuelto en una tortilla de harina." [constraint=True]
+	Combos -> "NACHO CRUNCHY BURRITO Q17.0
+Carne sazonada, salsa queso, tiras rojas, crema agria, tomate envuelto en una tortilla de harina." [constraint=True]
+	Combos -> "GORDITA CRUNCH Q18.0
+Flatbread a la plancha con abundante queso derretido, salsa spicy ranch, envuelto en un Taco original." [constraint=True]
+	Combos -> "COMBO #2 - BURRITO 1/2LB CRUNCHY Q32.0
+Burrito 1/2Lb Crunchy, Complemento a elegir y bebida lata." [constraint=True]
+	Combos -> "COMBO #1 - CHALUPA BAJA Q32.0
+Chalupa Baja, Complemento a elegir y bebida lata." [constraint=True]
+	"TACO BELL A DOMICILIO - Live Mas" -> Complementos [constraint=True]
+	Complementos -> "NACHOS SUPREME Q18.0
+Deliciosos Nacho chips servidos con frijoles, carne sazonada, salsa queso, crema agria, tomate fresco y cebollín." [constraint=True]
+	"TACO BELL A DOMICILIO - Live Mas" -> Postres [constraint=True]
+	Postres -> "CINNAMON TWISTS Q11.0
+" [constraint=True]
+	Postres -> "FLAUTA DE DULCE DE LECHE Q11.0
+" [constraint=True]
+	"TACO BELL A DOMICILIO - Live Mas" -> Bebidas [constraint=True]
+	Bebidas -> "AGUA PURA Q10.0
+AQUA 600ml" [constraint=True]
+	Bebidas -> "PEPSI Q10.0
+Lata" [constraint=True]
+	Bebidas -> "BE LIGHT Q15.0
+Botella 600ml" [constraint=True]
+}

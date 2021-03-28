@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lexemas</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Work+Sans:wght@300;500&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				font-family: 'Work Sans', sans-serif;
+				margin: 0;
+				padding: 0;
+				user-select: none;
+				box-sizing: border-box;
+			}
+
+			body {
+				display: flex;
+				position: relative;
+				justify-content: center;
+				align-content: center;
+				height: 100vh;
+				padding: 30px;
+			}
+
+			table {
+				text-align: left;
+				width: 800px;
+				height: max-content;
+			}
+
+			table tr:nth-child(even) {
+				background-color: #eee;
+			}
+
+			table td,
+			table th {
+				padding: 10px;
+				text-align: left;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>Lexema</th>
+				<th>Fila</th>
+				<th>Columna</th>
+				<th>Token</th>
+			</tr>
+			<tr><td>restaurante</td><td>1</td><td>1</td><td>identificador</td></tr><tr><td>=</td><td>1</td><td>13</td><td>operador</td></tr><tr><td>'TACO BELL A DOMICILIO - Live Mas'</td><td>1</td><td>15</td><td>cadena</td></tr><tr><td>'PROMOCIONES'</td><td>2</td><td>1</td><td>cadena</td></tr><tr><td>:</td><td>2</td><td>14</td><td>operador</td></tr><tr><td>family6</td><td>3</td><td>2</td><td>identificador</td></tr><tr><td>'FAMILY BOX SUPREME (PARA 6)'</td><td>3</td><td>0</td><td>cadena</td></tr><tr><td>145</td><td>3</td><td>40</td><td>número</td></tr><tr><td>'3 Burritos 5 capas, 3 Crunchywrap supreme, 2 Quesadillas de Pollo, 1 Nachos Supreme, 2 Cinnamon Twists.'</td><td>3</td><td>44</td><td>cadena</td></tr><tr><td>family4</td><td>4</td><td>2</td><td>identificador</td></tr><tr><td>'FAMILY BOX GRANDE (PARA 4)'</td><td>4</td><td>0</td><td>cadena</td></tr><tr><td>49</td><td>4</td><td>39</td><td>número</td></tr><tr><td>'2 Chalupas Supreme de Pollo Frito, 2 Burritos 5 capas, 4 Tacos Suaves, 1 Nachos Supreme y 2 Cinnamon Twists.'</td><td>4</td><td>42</td><td>cadena</td></tr><tr><td>family2</td><td>5</td><td>2</td><td>identificador</td></tr><tr><td>'FAMILY BOX MEDIANO (PARA 2)'</td><td>5</td><td>0</td><td>cadena</td></tr><tr><td>99</td><td>5</td><td>40</td><td>número</td></tr><tr><td>'2 Crunchywrap Supreme, 2 Tacos Suaves de Carne + 1 Nacho Supreme.'</td><td>5</td><td>0</td><td>cadena</td></tr><tr><td>'Combos'</td><td>7</td><td>1</td><td>cadena</td></tr><tr><td>:</td><td>7</td><td>9</td><td>operador</td></tr><tr><td>combo2</td><td>8</td><td>2</td><td>identificador</td></tr><tr><td>'COMBO #2 - BURRITO 1/2LB CRUNCHY'</td><td>8</td><td>9</td><td>cadena</td></tr><tr><td>32.00</td><td>8</td><td>44</td><td>número</td></tr><tr><td>'Burrito 1/2Lb Crunchy, Complemento a elegir y bebida lata.'</td><td>8</td><td>50</td><td>cadena</td></tr><tr><td>combo3</td><td>9</td><td>2</td><td>identificador</td></tr><tr><td>'COMBO #3 - BURRITO 5 CAPAS'</td><td>9</td><td>9</td><td>cadena</td></tr><tr><td>32.00</td><td>9</td><td>38</td><td>número</td></tr><tr><td>'Burrito 5 Capas, Complemento a elegir y bebida lata.'</td><td>9</td><td>44</td><td>cadena</td></tr><tr><td>combo1</td><td>10</td><td>2</td><td>identificador</td></tr><tr><td>'COMBO #1 - CHALUPA BAJA'</td><td>10</td><td>10</td><td>cadena</td></tr><tr><td>32</td><td>10</td><td>36</td><td>número</td></tr><tr><td>'Chalupa Baja, Complemento a elegir y bebida lata.'</td><td>10</td><td>40</td><td>cadena</td></tr><tr><td>'Individuales'</td><td>11</td><td>1</td><td>cadena</td></tr><tr><td>:</td><td>11</td><td>16</td><td>operador</td></tr><tr><td>crunchy</td><td>12</td><td>2</td><td>identificador</td></tr><tr><td>'NACHO CRUNCHY BURRITO'</td><td>12</td><td>10</td><td>cadena</td></tr><tr><td>17</td><td>12</td><td>34</td><td>número</td></tr><tr><td>'Carne sazonada, salsa queso, tiras rojas, crema agria, tomate envuelto en una tortilla de harina.'</td><td>12</td><td>37</td><td>cadena</td></tr><tr><td>stacker</td><td>13</td><td>2</td><td>identificador</td></tr><tr><td>'STACKER DE CARNE'</td><td>13</td><td>10</td><td>cadena</td></tr><tr><td>14.0</td><td>13</td><td>29</td><td>número</td></tr><tr><td>'Carne sazonada, salsa queso, mezcla de 3 quesos derretidos a la perfección dentro una tortilla de harina a la plancha en forma de triángulo.'</td><td>13</td><td>34</td><td>cadena</td></tr><tr><td>gordita</td><td>14</td><td>3</td><td>identificador</td></tr><tr><td>'GORDITA CRUNCH'</td><td>14</td><td>11</td><td>cadena</td></tr><tr><td>18.00</td><td>14</td><td>29</td><td>número</td></tr><tr><td>'Flatbread a la plancha con abundante queso derretido, salsa spicy ranch, envuelto en un Taco original.'</td><td>14</td><td>36</td><td>cadena</td></tr><tr><td>b5capas</td><td>15</td><td>2</td><td>identificador</td></tr><tr><td>'BURRITO 5 CAPAS'</td><td>15</td><td>10</td><td>cadena</td></tr><tr><td>16.000</td><td>15</td><td>28</td><td>número</td></tr><tr><td>'Deliciosa carne sazonada, frijoles, salsa queso, crema agria, auténtico queso cheddar envuelto en una tortilla de harina.'</td><td>15</td><td>35</td><td>cadena</td></tr><tr><td>'Complementos'</td><td>16</td><td>1</td><td>cadena</td></tr><tr><td>:</td><td>16</td><td>17</td><td>operador</td></tr><tr><td>p_supreme</td><td>17</td><td>2</td><td>identificador</td></tr><tr><td>'PAPAS SUPREME'</td><td>17</td><td>12</td><td>cadena</td></tr><tr><td>19</td><td>17</td><td>30</td><td>número</td></tr><tr><td>'Deliciosas Papas Fritas con carne sazonada, salsa queso, crema agria, tomate y cebollín.'</td><td>17</td><td>33</td><td>cadena</td></tr><tr><td>n_supreme</td><td>18</td><td>2</td><td>identificador</td></tr><tr><td>'NACHOS SUPREME'</td><td>18</td><td>13</td><td>cadena</td></tr><tr><td>18</td><td>18</td><td>30</td><td>número</td></tr><tr><td>'Deliciosos Nacho chips servidos con frijoles, carne sazonada, salsa queso, crema agria, tomate fresco y cebollín.'</td><td>18</td><td>33</td><td>cadena</td></tr><tr><td>'Postres'</td><td>19</td><td>2</td><td>cadena</td></tr><tr><td>:</td><td>19</td><td>12</td><td>operador</td></tr><tr><td>cinnamon</td><td>20</td><td>2</td><td>identificador</td></tr><tr><td>'CINNAMON TWISTS'</td><td>20</td><td>11</td><td>cadena</td></tr><tr><td>11</td><td>20</td><td>29</td><td>número</td></tr><tr><td>''</td><td>20</td><td>33</td><td>cadena</td></tr><tr><td>flauta</td><td>21</td><td>2</td><td>identificador</td></tr><tr><td>'FLAUTA DE DULCE DE LECHE'</td><td>21</td><td>9</td><td>cadena</td></tr><tr><td>11</td><td>21</td><td>36</td><td>número</td></tr><tr><td>''</td><td>21</td><td>40</td><td>cadena</td></tr><tr><td>'Bebidas'</td><td>22</td><td>1</td><td>cadena</td></tr><tr><td>:</td><td>22</td><td>10</td><td>operador</td></tr><tr><td>bb1</td><td>23</td><td>2</td><td>identificador</td></tr><tr><td>'PEPSI LIGHT'</td><td>23</td><td>6</td><td>cadena</td></tr><tr><td>10.</td><td>23</td><td>20</td><td>número</td></tr><tr><td>'Lata'</td><td>23</td><td>24</td><td>cadena</td></tr><tr><td>bb2</td><td>24</td><td>2</td><td>identificador</td></tr><tr><td>'AGUA PURA'</td><td>24</td><td>6</td><td>cadena</td></tr><tr><td>10.</td><td>24</td><td>18</td><td>número</td></tr><tr><td>'AQUA 600ml'</td><td>24</td><td>22</td><td>cadena</td></tr><tr><td>bb3</td><td>25</td><td>3</td><td>identificador</td></tr><tr><td>'PEPSI'</td><td>25</td><td>7</td><td>cadena</td></tr><tr><td>10.</td><td>25</td><td>16</td><td>número</td></tr><tr><td>'Lata'</td><td>25</td><td>20</td><td>cadena</td></tr><tr><td>b</td><td>26</td><td>2</td><td>identificador</td></tr><tr><td>'BE LIGHT'</td><td>26</td><td>4</td><td>cadena</td></tr><tr><td>15.</td><td>26</td><td>15</td><td>número</td></tr><tr><td>'Botella 600ml'</td><td>26</td><td>20</td><td>cadena</td></tr>
+		</table>
+	</body>
+</html>
